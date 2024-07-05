@@ -1,4 +1,4 @@
-import HomeItem from "../components/Homeitem";
+import HomeItem from "../components/HomeItem";
 import { useSelector } from "react-redux";
 
 const Home = () => {
