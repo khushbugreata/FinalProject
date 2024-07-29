@@ -1,6 +1,28 @@
 import { useSelector } from "react-redux";
+import axios from 'axios';
 
 const BagSummary = () => {
+  
+    const handlePayment = async (e) => {
+      // alert("inside payment gateway")
+      e.preventDefault();
+  
+      try {
+        const res = await axios.get('http://localhost:8080/payment');
+  
+        if (res && res.data) {
+          window.location.href = res.data.links[1].href;
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+      // alert("inside payment gateway")
+    };
+  
+      
+  
+
+
   const bagItemIds = useSelector((state) => state.bag);
   const items = useSelector((state) => state.items);
   const finalItems = items.filter((item) => {
@@ -44,7 +66,7 @@ const BagSummary = () => {
           <span className="price-item-value">₹{finalPayment}</span>
         </div>
       </div>
-      <button className="btn-place-order">
+      <button  onClick={handlePayment} className="btn-place-order">
         <div className="css-xjhrni">PLACE ORDER</div>
       </button>
     </div>
